@@ -1,4 +1,4 @@
-﻿import { ConversionRatioConfig } from "../typedefs";
+﻿import { ConversionRatioConfig } from "../typedefs/index";
 
 export const NANOSECOND_TO_MS_CONVERSION_RATIO: number = 1 / 1e6;
 export const MICROSECOND_TO_MS_CONVERSION_RATIO: number = 1 / 1000;

@@ -1,0 +1,18 @@
+﻿name: Run Tests
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Install dependencies📦
+        run: npm i
+      - name: Build package👷‍♂️
+        run: npm run build
+      - name: Run tests🔬
+        run: npm test

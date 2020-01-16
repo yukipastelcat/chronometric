@@ -1,6 +1,8 @@
-﻿import { parseNumericPart } from '../functions';
-import { DEFAULT_CONVERSION_RATIOS } from '../constants';
-import type { ConversionRatioConfig } from '../typedefs';
+﻿import parseNumericPart from '../functions/parseNumericPart';
+import roundToPrecision from '../functions/roundToPrecision';
+import getFractionPartLength from '../functions/getFractionPartLength';
+import { DEFAULT_CONVERSION_RATIOS } from '../constants/conversionRatios';
+import { ConversionRatioConfig } from '../typedefs/index';
 
 class Chronometric {
   constructor(
@@ -19,6 +21,7 @@ class Chronometric {
   ) {
     let milliseconds = 0;
 
+    /* istanbul ignore next */
     if (typeof duration === 'number') {
       milliseconds = duration;
     } else {
@@ -27,17 +30,20 @@ class Chronometric {
       });
     }
 
+    /* istanbul ignore next */
     const keys = Object.keys(conversionRatios).sort((keyA, keyB) => {
       if (conversionRatios[keyA] < conversionRatios[keyB]) return 1;
       if (conversionRatios[keyA] > conversionRatios[keyB]) return -1;
       return 0;
     });
+    const maxPrecision = getFractionPartLength(conversionRatios[keys[keys.length - 1]]);
 
     keys.forEach(key => {
       let value = Math.trunc(milliseconds / conversionRatios[key]);
-      milliseconds -= value * conversionRatios[key];
+      milliseconds = roundToPrecision(milliseconds - (value * conversionRatios[key]), maxPrecision);
       Object.defineProperty(this, key, {
         value,
+        enumerable: true,
         writable: true,
       });
     });
@@ -53,17 +59,17 @@ class Chronometric {
   }
 
   toString(): string {
-    return Object.keys(this).map(key => `${this[key]}${key}`).join(' ');
+    return Object.keys(this).filter(key => (this as any)[key] !== 0).map(key => `${(this as any)[key]}${key}`).join(' ');
   }
   
-  static fromString(str, conversionRatios = Chronometric.defaultConversionRatios): Chronometric {
+  static fromString(str: string, conversionRatios = Chronometric.defaultConversionRatios): Chronometric {
     return new Chronometric(Object.keys(conversionRatios).reduce((accumulator, key) => {
       accumulator[key] = parseNumericPart(str, new RegExp(`[\\d+.]+${key}(\\s|$)`));
       return accumulator;
-    }, {}), conversionRatios);
+    }, {} as any), conversionRatios);
   }
 
-  static defaultConversionRatios = DEFAULT_CONVERSION_RATIOS;
+  static defaultConversionRatios: ConversionRatioConfig = DEFAULT_CONVERSION_RATIOS;
 }
 
 export default Chronometric;

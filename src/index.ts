@@ -1,4 +1,5 @@
-﻿export {
+﻿export { default as Chronometric } from './classes/chronometric';
+export {
   NANOSECOND_TO_MS_CONVERSION_RATIO,
   MICROSECOND_TO_MS_CONVERSION_RATIO,
   SECOND_TO_MS_CONVERSION_RATIO,
@@ -8,4 +9,4 @@
   WORKWEEK_TO_MS_CONVERSION_RATIO,
   WORKMONTH_TO_MS_CONVERSION_RATIO,
   DEFAULT_CONVERSION_RATIOS,
-} from './conversionRatios';
+} from './constants/conversionRatios';
