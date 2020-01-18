@@ -7,3 +7,5 @@ jest.config.js
 chronometric.code-workspace
 .github
 docs
+src
+!dist/src
