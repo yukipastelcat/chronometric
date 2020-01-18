@@ -1,6 +1,6 @@
 {
   "name": "chronometric",
-  "version": "1.0.0",
+  "version": "1.0.1-beta.0",
   "description": "JavaScript library for working with time durations in \"1mo 1w 1d\" format.",
   "main": "./dist/chronometric.umd.js",
   "types": "./dist/src/index.d.ts",
