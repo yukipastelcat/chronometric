@@ -23,11 +23,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - name: Setup git
-        run: |
-            git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
-            git config --global user.name "$GITHUB_ACTOR"
-            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
       - name: Build package
@@ -36,6 +31,26 @@ jobs:
         with:
           name: dist
           path: dist
+  build-docs:
+    - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Setup git
+        run: |
+            git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
+            git config --global user.name "$GITHUB_ACTOR"
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+      - name: Build docs
+        run: npm run docs
+      - name: Stage changes
+        run: git add -A
+      - name: Commit changes
+        run: git commit -m "Updated docs"
+      - name: Push
+        run: git push
   publish-beta:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop'
@@ -45,6 +60,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+      - name: Setup git
+        run: |
+            git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
+            git config --global user.name "$GITHUB_ACTOR"
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
       - name: Bump version
         run: npm version prerelease --preid="beta"
       - name: Push
@@ -68,10 +88,13 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+      - name: Setup git
+        run: |
+            git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
+            git config --global user.name "$GITHUB_ACTOR"
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
       - name: Bump version
         run: npm version from-git
-      - name: Stage changes
-        run: git add -A
       - name: Push
         run: git push
       - name: Push tags
