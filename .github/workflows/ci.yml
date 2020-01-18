@@ -32,7 +32,10 @@ jobs:
           name: dist
           path: dist
   build-docs:
-    - uses: actions/checkout@v2
+    runs-on: ubuntu-latest
+    needs: build-package
+    steps:
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
