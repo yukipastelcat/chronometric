@@ -57,7 +57,7 @@ jobs:
   publish-beta:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop'
-    needs: build-package
+    needs: build-docs
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -85,7 +85,7 @@ jobs:
   publish-release:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
-    needs: build-package
+    needs: build-docs
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
