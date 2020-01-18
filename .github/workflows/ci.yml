@@ -1,0 +1,75 @@
+﻿name: CI
+on:
+  push
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Install dependencies
+        uses: bahmutov/npm-install@v1
+      - name: Run tests
+        run: npm run test
+  build-package:
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
+    needs: run-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup git
+        run: |
+            git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
+            git config --global user.name "$GITHUB_ACTOR"
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+      - name: Build package
+        run: npm run build
+      - uses: actions/upload-artifact@v1
+        with:
+          name: dist
+          path: dist
+  publish-beta:
+    if: github.ref == 'refs/heads/develop'
+    needs: build-package
+    steps:
+      - name: Bump version
+        run: npm version prerelease --preid="beta"
+      - name: Push
+        run: git push
+      - name: Push tags
+        run: git push --tags
+      - name: Download artifacts
+      - uses: actions/download-artifact@v1
+        with:
+          name: dist
+      - name: Publish to registry
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+  publish-release:
+    if: github.ref == 'refs/heads/master'
+    needs: build-package
+    steps:
+      - name: Bump version
+        run: npm version prerelease from-git
+      - name: Stage changes
+        run: git add -A
+      - name: Push
+        run: git push
+      - name: Push tags
+        run: git push --tags
+      - name: Download artifacts
+      - uses: actions/download-artifact@v1
+        with:
+          name: dist
+      - name: Publish to registry
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+
+
+
+
+
