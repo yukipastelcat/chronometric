@@ -15,9 +15,9 @@ jobs:
       - name: Run tests
         run: npm run test
   build-package:
+    runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
     needs: run-tests
-    runs-on: ubuntu-latest
     steps:
       - name: Setup git
         run: |
@@ -31,6 +31,7 @@ jobs:
           name: dist
           path: dist
   publish-beta:
+    runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop'
     needs: build-package
     steps:
@@ -49,6 +50,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
   publish-release:
+    runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     needs: build-package
     steps:
