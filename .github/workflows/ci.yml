@@ -47,7 +47,7 @@ jobs:
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
       - name: Build docs
-        run: npm run docs
+        run: npm run docs:ci
       - name: Stage changes
         run: git add -A
       - name: Commit changes
