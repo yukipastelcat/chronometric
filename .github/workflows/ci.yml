@@ -83,7 +83,7 @@ jobs:
       - name: Publish to registry
         run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
   publish-release:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
@@ -113,7 +113,7 @@ jobs:
       - name: Publish to registry
         run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
 
 
 
