@@ -41,7 +41,7 @@ jobs:
       - name: Push tags
         run: git push --tags
       - name: Download artifacts
-      - uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v1
         with:
           name: dist
       - name: Publish to registry
@@ -61,7 +61,7 @@ jobs:
       - name: Push tags
         run: git push --tags
       - name: Download artifacts
-      - uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v1
         with:
           name: dist
       - name: Publish to registry
