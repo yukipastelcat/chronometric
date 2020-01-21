@@ -9,7 +9,7 @@
     "build": "webpack --mode=production",
     "docs": "typedoc --options typedoc.json --exclude \"**/*+(e2e`|spec`|index).ts\" ./src --disableOutputCheck",
     "docs:ci": "typedoc --options typedoc.json --exclude \"**/*+(e2e|spec|index).ts\" ./src --disableOutputCheck",
-    "test": "jest --env=node --colors --coverage test"
+    "test": "jest --env=node --colors --coverage test && codecov"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/yukipastelcat/chronometric#readme",
   "devDependencies": {
     "@types/jest": "^24.9.0",
+    "codecov": "^3.6.1",
     "jest": "^24.9.0",
     "ts-jest": "^24.3.0",
     "ts-loader": "^6.2.1",
