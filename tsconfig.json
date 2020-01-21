@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "./dist",
     "noImplicitAny": true,
-    "lib": ["ES2019", "DOM"],
+    "lib": ["ES2019"],
     "declaration": true,
     "module": "es6",
     "target": "es5",

@@ -87,3 +87,35 @@ const dateTo = new Date(0);
 
 const chrono = new Chronometric(dateFrom - dateTo); // will contain timespan between dateFrom and dateTo
 ```
+
+```js
+import { Chronometric } from 'chronometric';
+
+const now = Date.now();
+const tomorrow = new Date(now + Chronometric.fromString("1d"));
+const inAWeek = new Date(now + Chronometric.fromString("1w"));
+```
+
+### Worktime units
+
+```js
+import {
+  Chronometric,
+  HOUR_TO_MS_CONVERSION_RATIO,
+  MINUTE_TO_MS_CONVERSION_RATIO
+} from 'chronometric';
+
+Chronometric.defaultConversionRatios = {
+	ms: 1,
+  m: MINUTE_TO_MS_CONVERSION_RATIO,
+  h: HOUR_TO_MS_CONVERSION_RATIO,
+  d: 8 * HOUR_TO_MS_CONVERSION_RATIO, // 8 hour work day
+  w: 5 * 8 * HOUR_TO_MS_CONVERSION_RATIO // 5 day work week
+};
+
+const spentTime = ["9h 30m", "12h 22m"];
+const totalSpentTime = new Chronometric(
+  spentTime
+  	.reduce((acc, item) => acc + Chronometric.fromString(item), 0)
+).toString(); // "2d 5h 52m"
+```
