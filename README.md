@@ -77,7 +77,7 @@ const chronoB = new Chrono(
 console.log(chronoB.toString()); // will output "2s 200ms"
 ```
 
-### Works with JavaScript Date objects
+### Works with JavaScript [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) objects
 
 ```js
 import { Chronometric } from 'chronometric';
@@ -119,3 +119,7 @@ const totalSpentTime = new Chronometric(
   	.reduce((acc, item) => acc + Chronometric.fromString(item), 0)
 ).toString(); // "2d 5h 52m"
 ```
+
+## Known issues
+
++ When using big and small conversion ratios small ones can be lost due to JavaScript's Number type behavior
