@@ -7,8 +7,6 @@ import { ConversionRatioConfig } from '../typedefs/index';
 class Chronometric {
   constructor(
     duration: ({ [key: string]: number }|number) = {
-      ns: 0,
-      μs: 0,
       ms: 0,
       s: 0,
       m: 0,
@@ -16,6 +14,7 @@ class Chronometric {
       d: 0,
       w: 0,
       mo: 0,
+      y: 0
     },
     conversionRatios: ConversionRatioConfig = Chronometric.defaultConversionRatios,
   ) {
@@ -62,6 +61,11 @@ class Chronometric {
     return Object.keys(this).filter(key => (this as any)[key] !== 0).map(key => `${(this as any)[key]}${key}`).join(' ');
   }
   
+  /**
+   * Parses string in "1d 1w 1mo" format and creates Chronometric instance
+   * @param str - String to parse duration from
+   * @param conversionRatios - Custom conversion ratios
+   */
   static fromString(str: string, conversionRatios = Chronometric.defaultConversionRatios): Chronometric {
     return new Chronometric(Object.keys(conversionRatios).reduce((accumulator, key) => {
       accumulator[key] = parseNumericPart(str, new RegExp(`[\\d+.]+${key}(\\s|$)`));
@@ -69,6 +73,9 @@ class Chronometric {
     }, {} as any), conversionRatios);
   }
 
+  /**
+   * Default conversion ratios for instances of Chronometric
+   */
   static defaultConversionRatios: ConversionRatioConfig = DEFAULT_CONVERSION_RATIOS;
 }
 

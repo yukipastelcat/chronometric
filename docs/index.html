@@ -67,7 +67,110 @@
 				<a href="#chronometric" id="chronometric" style="color: inherit; text-decoration: none;">
 					<h1>chronometric</h1>
 				</a>
+				<p><a href="https://codecov.io/gh/yukipastelcat/chronometric"><img src="https://codecov.io/gh/yukipastelcat/chronometric/branch/master/graph/badge.svg" alt="codecov"></a>
+					<img src="https://img.shields.io/github/workflow/status/yukipastelcat/chronometric/CI/master?label=CI%20%28master%29" alt="GitHub Workflow Status (master)">
+					<img src="https://img.shields.io/github/workflow/status/yukipastelcat/chronometric/CI/develop?label=CI%20%28beta%29" alt="GitHub Workflow Status (develop)">
+					<img src="https://img.shields.io/npm/l/chronometric" alt="npm">
+				<img src="https://img.shields.io/npm/dm/chronometric" alt="npm"></p>
 				<p>JavaScript library for working with time durations in &quot;1mo 1w 1d&quot; format.</p>
+				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
+					<h2>Install</h2>
+				</a>
+				<pre><code class="language-shell"><span class="hljs-meta">$</span><span class="bash"> npm install --save chronometric</span></code></pre>
+				<a href="#codesandbox" id="codesandbox" style="color: inherit; text-decoration: none;">
+					<h2>CodeSandbox</h2>
+				</a>
+				<p>You can find CodeSandbox template <a href="https://codesandbox.io/s/chronometric-basic-sandbox-l5sho">here</a></p>
+				<a href="#basic-usage" id="basic-usage" style="color: inherit; text-decoration: none;">
+					<h2>Basic usage</h2>
+				</a>
+				<a href="#recommended" id="recommended" style="color: inherit; text-decoration: none;">
+					<h3>Recommended</h3>
+				</a>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { Chronometric } <span class="hljs-keyword">from</span> <span class="hljs-string">'chronometric'</span>;
+
+<span class="hljs-keyword">const</span> chronoA = <span class="hljs-keyword">new</span> Chronometric(<span class="hljs-number">2200</span>);
+<span class="hljs-keyword">const</span> chronoB = Chronometric.fromString(<span class="hljs-string">'1w 1d'</span>);
+<span class="hljs-keyword">const</span> chronoC = <span class="hljs-keyword">new</span> Chronometric({ <span class="hljs-attr">d</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">h</span>: <span class="hljs-number">1</span> });</code></pre>
+				<a href="#via-a-hrefhttpsnodejsorgnodejsa-require" id="via-a-hrefhttpsnodejsorgnodejsa-require" style="color: inherit; text-decoration: none;">
+					<h3>Via <a href="https://nodejs.org/">Node.js</a> require()</h3>
+				</a>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> { Chronometric } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'chronometric'</span>);
+
+<span class="hljs-keyword">const</span> chronoA = <span class="hljs-keyword">new</span> Chronometric(<span class="hljs-number">2200</span>);
+<span class="hljs-keyword">const</span> chronoB = Chronometric.fromString(<span class="hljs-string">'1w 1d'</span>);
+<span class="hljs-keyword">const</span> chronoC = <span class="hljs-keyword">new</span> Chronometric({ <span class="hljs-attr">d</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">h</span>: <span class="hljs-number">1</span> });</code></pre>
+				<a href="#via-a-hrefunpkgcomunpkga" id="via-a-hrefunpkgcomunpkga" style="color: inherit; text-decoration: none;">
+					<h3>Via <a href="unpkg.com">UNPKG</a></h3>
+				</a>
+				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://unpkg.com/chronometric@latest"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+  <span class="hljs-keyword">const</span> { Chronometric } = <span class="hljs-built_in">window</span>.chronometric;
+
+  <span class="hljs-keyword">const</span> chronoA = <span class="hljs-keyword">new</span> Chronometric(<span class="hljs-number">2200</span>);
+  <span class="hljs-keyword">const</span> chronoB = Chronometric.fromString(<span class="hljs-string">'1w 1d'</span>);
+  <span class="hljs-keyword">const</span> chronoC = <span class="hljs-keyword">new</span> Chronometric({ <span class="hljs-attr">d</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">h</span>: <span class="hljs-number">1</span> });
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code></pre>
+				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+					<h2>Features</h2>
+				</a>
+				<a href="#custom-global-and-instance-unit-configuration" id="custom-global-and-instance-unit-configuration" style="color: inherit; text-decoration: none;">
+					<h3>Custom global and instance unit configuration</h3>
+				</a>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { Chronometric } <span class="hljs-keyword">from</span> <span class="hljs-string">'chronometric'</span>;
+
+<span class="hljs-comment">// global configuration</span>
+Chronometric.defaultConversionRatios = {
+  <span class="hljs-attr">ms</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">d</span>: <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>
+};
+<span class="hljs-built_in">console</span>.log(Chronometric.fromString(<span class="hljs-string">"1d"</span>) + <span class="hljs-number">0</span>); <span class="hljs-comment">// will output 86400000</span>
+
+<span class="hljs-comment">// instance configuration</span>
+<span class="hljs-keyword">const</span> chronoB = <span class="hljs-keyword">new</span> Chrono(
+  <span class="hljs-number">2200</span>,
+  {
+    <span class="hljs-attr">ms</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">s</span>: <span class="hljs-number">1000</span>
+  }
+);
+<span class="hljs-built_in">console</span>.log(chronoB.toString()); <span class="hljs-comment">// will output "2s 200ms"</span></code></pre>
+				<a href="#works-with-javascript-a-hrefhttpsdevelopermozillaorgen-usdocswebjavascriptreferenceglobal_objectsdatedatea-objects" id="works-with-javascript-a-hrefhttpsdevelopermozillaorgen-usdocswebjavascriptreferenceglobal_objectsdatedatea-objects" style="color: inherit; text-decoration: none;">
+					<h3>Works with JavaScript <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Date</a> objects</h3>
+				</a>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { Chronometric } <span class="hljs-keyword">from</span> <span class="hljs-string">'chronometric'</span>;
+
+<span class="hljs-keyword">const</span> dateFrom = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>();
+<span class="hljs-keyword">const</span> dateTo = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">0</span>);
+
+<span class="hljs-keyword">const</span> chrono = <span class="hljs-keyword">new</span> Chronometric(dateFrom - dateTo); <span class="hljs-comment">// will contain timespan between dateFrom and dateTo</span></code></pre>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> { Chronometric } <span class="hljs-keyword">from</span> <span class="hljs-string">'chronometric'</span>;
+
+<span class="hljs-keyword">const</span> now = <span class="hljs-built_in">Date</span>.now();
+<span class="hljs-keyword">const</span> tomorrow = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(now + Chronometric.fromString(<span class="hljs-string">"1d"</span>));
+<span class="hljs-keyword">const</span> inAWeek = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(now + Chronometric.fromString(<span class="hljs-string">"1w"</span>));</code></pre>
+				<a href="#worktime-units" id="worktime-units" style="color: inherit; text-decoration: none;">
+					<h3>Worktime units</h3>
+				</a>
+				<pre><code class="language-js"><span class="hljs-keyword">import</span> {
+  Chronometric,
+  HOUR_TO_MS_CONVERSION_RATIO,
+  MINUTE_TO_MS_CONVERSION_RATIO
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'chronometric'</span>;
+
+Chronometric.defaultConversionRatios = {
+    <span class="hljs-attr">ms</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">m</span>: MINUTE_TO_MS_CONVERSION_RATIO,
+  <span class="hljs-attr">h</span>: HOUR_TO_MS_CONVERSION_RATIO,
+  <span class="hljs-attr">d</span>: <span class="hljs-number">8</span> * HOUR_TO_MS_CONVERSION_RATIO, <span class="hljs-comment">// 8 hour work day</span>
+  <span class="hljs-attr">w</span>: <span class="hljs-number">5</span> * <span class="hljs-number">8</span> * HOUR_TO_MS_CONVERSION_RATIO <span class="hljs-comment">// 5 day work week</span>
+};
+
+<span class="hljs-keyword">const</span> spentTime = [<span class="hljs-string">"9h 30m"</span>, <span class="hljs-string">"12h 22m"</span>];
+<span class="hljs-keyword">const</span> totalSpentTime = <span class="hljs-keyword">new</span> Chronometric(
+  spentTime
+      .reduce(<span class="hljs-function">(<span class="hljs-params">acc, item</span>) =&gt;</span> acc + Chronometric.fromString(item), <span class="hljs-number">0</span>)
+).toString(); <span class="hljs-comment">// "2d 5h 52m"</span></code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

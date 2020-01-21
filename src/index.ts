@@ -9,3 +9,4 @@ export {
   YEAR_TO_MS_CONVERSION_RATIO,
   DEFAULT_CONVERSION_RATIOS,
 } from './constants/conversionRatios';
+export { ConversionRatioConfig } from './typedefs/index';
