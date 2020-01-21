@@ -14,6 +14,9 @@ jobs:
         uses: bahmutov/npm-install@v1
       - name: Run tests
         run: npm run test
+        env:
+          CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+
   build-package:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop'
