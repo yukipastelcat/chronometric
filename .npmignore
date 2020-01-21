@@ -1,0 +1,11 @@
+﻿tests
+coverage
+tsconfig.json
+typedoc.json
+webpack.config.js
+jest.config.js
+chronometric.code-workspace
+.github
+docs
+src
+!dist/src
