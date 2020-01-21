@@ -24,7 +24,8 @@ const umd = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'chronometric.umd.js',
     library: 'chronometric',
-    libraryTarget: 'umd'
+    libraryTarget: 'umd',
+    globalObject: 'this'
   },
   ...config,
 };
