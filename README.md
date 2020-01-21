@@ -122,4 +122,4 @@ const totalSpentTime = new Chronometric(
 
 ## Known issues
 
-+ When using big and small conversion ratios small ones can be lost due to JavaScript's Number type behavior
++ When using big and small conversion ratios simultaniously (i.e. 1 year and 1 nanosecond to milliseconds) small ones can be lost due to JavaScript number type precision (see [Number.MAX_SAFE_INTEGER](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER))
