@@ -52,8 +52,6 @@ jobs:
         uses: bahmutov/npm-install@v1
       - name: Build docs
         run: npm run docs:ci
-      - name: Create .nojekyll
-        run: touch docs/.nojekyll
       - name: Stage changes
         run: git add -A
       - name: Commit changes
