@@ -36,12 +36,12 @@ describe("Chronometric", () => {
         d: 0,
         mo: 1
       });
-      expect(chrono.toString()).toBe("1mo 1h 1s 1ms 1ns");
+      expect(chrono.toString()).toBe("1mo 1h 1s 1ms");
     });
 
     test("correctly converts units", () => {
       const chrono = Chronometric.fromString("25d 65s 1100ms");
-      expect(chrono.toString()).toBe("1mo 1w 1m 6s 100ms");
+      expect(chrono.toString()).toBe("3w 4d 1m 6s 100ms");
     });
   });
 
