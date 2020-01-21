@@ -7,8 +7,6 @@ import { ConversionRatioConfig } from '../typedefs/index';
 class Chronometric {
   constructor(
     duration: ({ [key: string]: number }|number) = {
-      ns: 0,
-      μs: 0,
       ms: 0,
       s: 0,
       m: 0,
@@ -16,6 +14,7 @@ class Chronometric {
       d: 0,
       w: 0,
       mo: 0,
+      y: 0
     },
     conversionRatios: ConversionRatioConfig = Chronometric.defaultConversionRatios,
   ) {
