@@ -23,7 +23,7 @@
   "homepage": "https://github.com/yukipastelcat/chronometric#readme",
   "devDependencies": {
     "@types/jest": "^24.9.0",
-    "codecov": "^3.6.5",
+    "codecov": "^3.8.3",
     "jest": "^24.9.0",
     "ts-jest": "^24.3.0",
     "ts-loader": "^6.2.1",
